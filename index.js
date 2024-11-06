@@ -65,7 +65,8 @@ const drawio_edit = {
           onclick: `DiagramEditor.editElement(this.firstChild, '${rndid}');`,
         },
         v || emptySvg
-      )
+      ),
+      style(`.tox .tox-editor-header {z-index: 0;}`)
     );
   },
 };
