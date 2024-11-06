@@ -275,7 +275,7 @@ DiagramEditor.prototype.getFrameStyle = function()
  */
 DiagramEditor.prototype.getFrameUrl = function()
 {
-	var url = this.drawDomain + '?proto=json&spin=1';
+	var url = this.drawDomain + '?proto=json&spin=1&noSaveBtn=1';
 
 	if (this.ui != null)
 	{
@@ -348,6 +348,8 @@ DiagramEditor.prototype.handleMessage = function(msg)
 	}
 	else if (msg.event == 'save')
 	{
+		console.log("save", msg);
+		
     if(msg.data) this.setElementData(this.startElement, msg.data);
 
     this.save(msg.xml, false, this.startElement);
