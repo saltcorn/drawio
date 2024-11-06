@@ -29,7 +29,7 @@ const emptySvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://ww
             <foreignObject style="overflow: visible; text-align: left;" pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
                <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 30px; margin-left: 2px;">
                   <div style="box-sizing: border-box; font-size: 0; text-align: center; ">
-                     <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">This is a test.</div>
+                     <div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: #000000; line-height: 1.2; pointer-events: all; white-space: normal; word-wrap: normal; ">Click to create diagram</div>
                   </div>
                </div>
             </foreignObject>
