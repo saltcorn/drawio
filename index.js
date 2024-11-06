@@ -66,7 +66,7 @@ const drawio_edit = {
         },
         v || emptySvg
       ),
-      style(`.tox .tox-editor-header {z-index: 0;}`)
+      style(`.tox .tox-editor-header {z-index: 0;}`) // avoid tinymce edit bar
     );
   },
 };
