@@ -7,13 +7,14 @@
  *
  * See https://jgraph.github.io/drawio-integration/javascript.html
  */
-function DiagramEditor(config, ui, done, initialized, urlParams)
+function DiagramEditor(config, ui, done, initialized, urlParams, rndid)
 {
 	this.config = (config != null) ? config : this.config;
 	this.ui = (ui != null) ? ui : this.ui;
 	this.done = (done != null) ? done : this.done;
 	this.initialized = (initialized != null) ? initialized : this.initialized;
 	this.urlParams = urlParams;
+	this.rndid = rndid;
 
 	var self = this;
 
@@ -42,7 +43,7 @@ function DiagramEditor(config, ui, done, initialized, urlParams)
 /**
  * Static method to edit the diagram in the given img or object.
  */
-DiagramEditor.editElement = function(elt, config, ui, done, urlParams)
+DiagramEditor.editElement = function(elt, rndid, config, ui, done, urlParams)
 {
   if (!elt.diagramEditorStarting)
   {
@@ -51,7 +52,7 @@ DiagramEditor.editElement = function(elt, config, ui, done, urlParams)
     return new DiagramEditor(config, ui, done, function()
     {
         delete elt.diagramEditorStarting;
-    }, urlParams).editElement(elt);
+    }, urlParams,rndid).editElement(elt);
    }
 };
 
@@ -78,7 +79,7 @@ DiagramEditor.prototype.xml = null;
 /**
  * Format to use.
  */
-DiagramEditor.prototype.format = 'xml';
+DiagramEditor.prototype.format = 'svg';
 
 /**
  * Specifies if libraries should be enabled.
@@ -131,16 +132,21 @@ DiagramEditor.prototype.getElementData = function(elem)
 DiagramEditor.prototype.setElementData = function(elem, data)
 {
 	var name = elem.nodeName.toLowerCase();
-
+	let val
 	if (name == 'svg')
 	{
-		elem.outerHTML = atob(data.substring(data.indexOf(',') + 1));
+		val = atob(data.substring(data.indexOf(',') + 1));
+		elem.outerHTML = val
 	}
 	else
 	{
+		val = data
 		elem.setAttribute((name == 'img') ? 'src' : 'data', data);
 	}
-
+  const $textarea = $(`#${this.rndid}`).find("textarea");
+	$textarea.val(val)
+		.trigger('change')
+		
 	return elem;
 };
 
@@ -330,6 +336,8 @@ DiagramEditor.prototype.handleMessage = function(msg)
 	}
 	else if (msg.event == 'autosave')
 	{
+    if(msg.data) this.setElementData(this.startElement, msg.data);
+		
 		this.save(msg.xml, true, this.startElement);
 	}
 	else if (msg.event == 'export')
@@ -340,6 +348,8 @@ DiagramEditor.prototype.handleMessage = function(msg)
 	}
 	else if (msg.event == 'save')
 	{
+    if(msg.data) this.setElementData(this.startElement, msg.data);
+
     this.save(msg.xml, false, this.startElement);
     this.xml = msg.xml;
 

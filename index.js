@@ -6,6 +6,7 @@ const {
   domReady,
   textarea,
   style,
+  text_attr,
 } = require("@saltcorn/markup/tags");
 const File = require("@saltcorn/data/models/file");
 const User = require("@saltcorn/data/models/user");
@@ -44,16 +45,27 @@ const drawio_edit = {
   blockDisplay: true,
   handlesTextStyle: true,
   configFields: [],
-  run: (nm, v, attrs, cls) => {
-    //const rndcls = `drawio${Math.floor(Math.random() * 16777215).toString(16)}`;
+  run: (nm, v, attrs, cls, required, field) => {
+    const rndid = `drawio${Math.floor(Math.random() * 16777215).toString(16)}`;
 
     return div(
-      {
-        style: "cursor: pointer; display:inline-block;",
-        title: "Click to edit",
-        onclick: "DiagramEditor.editElement(this.firstChild);",
-      },
-      v || emptySvg
+      { class: "drawio-edit-wrap", id: rndid },
+      textarea({
+        name: text_attr(nm),
+        id: `input${text_attr(nm)}`,
+        class: "d-none",
+        onChange: attrs.onChange,
+        "data-fieldname": text_attr(field.name),
+        value: v,
+      }),
+      div(
+        {
+          style: "cursor: pointer; display:inline-block;",
+          title: "Click to edit",
+          onclick: `DiagramEditor.editElement(this.firstChild, '${rndid}');`,
+        },
+        v || emptySvg
+      )
     );
   },
 };
