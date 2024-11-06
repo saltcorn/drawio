@@ -66,6 +66,15 @@ const drawio_edit = {
         },
         v || emptySvg
       ),
+
+      script(
+        domReady(
+          `$('#${rndid} textarea').on("set_form_field", ()=>{
+            const newVal = $('#${rndid} textarea').val() || \`${emptySvg}\`;
+            $('#${rndid} div').html(newVal);
+          })`
+        )
+      ),
       style(`.tox .tox-editor-header {z-index: 0;}`) // avoid tinymce edit bar
     );
   },
