@@ -281,9 +281,9 @@ DiagramEditor.prototype.getFrameStyle = function()
  */
 DiagramEditor.prototype.getFrameUrl = function()
 {
-	var url = this.drawDomain + '?proto=json&spin=1&noSaveBtn=1';
+	var url = this.drawDomain + '?embed=1&embedRT=1&configure=1&ui=kennedy&lang=en&spin=1&proto=json&keepmodified=1&noSaveBtn=1';
 
-	if (this.ui != null)
+	/*if (this.ui != null)
 	{
 		url += '&ui=' + this.ui;
 	}
@@ -297,7 +297,7 @@ DiagramEditor.prototype.getFrameUrl = function()
 	{
 		url += '&configure=1';
 	}
-
+  */
 	if (this.urlParams != null)
 	{
 		url += '&' + this.urlParams.join('&');
