@@ -157,6 +157,8 @@ DiagramEditor.prototype.startEditing = function(data, format, title)
 {
 	if (this.frame == null)
 	{
+		this.previousScrollTop = window.scrollY;
+		window.scrollTo(0,0);
 		window.addEventListener('message', this.handleMessageEvent);
 		this.format = (format != null) ? format : this.format;
 		this.title = (title != null) ? title : this.title;
@@ -213,12 +215,13 @@ DiagramEditor.prototype.setActive = function(active)
 		this.previousOverflow = document.body.style.overflow;
 		this.previousBodyHeight = document.body.style.height;
 		document.body.style.overflow = 'hidden';
-		document.body.style.height = '100vh';
+		document.body.style.height = '100vh';		
 	}
 	else
 	{
 		document.body.style.overflow = this.previousOverflow;
 		document.body.style.height = this.previousBodyHeight;
+		window.scrollTo(0,this.previousScrollTop);
 	}
 };
 
