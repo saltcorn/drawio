@@ -75,7 +75,7 @@ const drawio_edit = {
           })`
         )
       ),
-      style(`.tox .tox-editor-header {z-index: 0;}`) // avoid tinymce edit bar
+      style(`iframe.drawio {z-index: 9999;}`) // avoid tinymce edit bar
     );
   },
 };
