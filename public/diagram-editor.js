@@ -211,11 +211,14 @@ DiagramEditor.prototype.setActive = function(active)
 	if (active)
 	{
 		this.previousOverflow = document.body.style.overflow;
+		this.previousBodyHeight = document.body.style.height;
 		document.body.style.overflow = 'hidden';
+		document.body.style.height = '100vh';
 	}
 	else
 	{
 		document.body.style.overflow = this.previousOverflow;
+		document.body.style.height = this.previousBodyHeight;
 	}
 };
 
