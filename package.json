@@ -1,6 +1,6 @@
 {
   "name": "@saltcorn/drawio",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Drawing diagrams with draw.io",
   "main": "index.js",
   "dependencies": {
